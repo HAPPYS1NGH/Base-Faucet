@@ -1,23 +1,33 @@
 import { Analytics } from "@vercel/analytics/react";
-
+import localFont from "next/font/local";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
+import Header from "@/components/shared/header";
+import Footer from "@/components/shared/footer";
+
+const montserrat = Montserrat({ subsets: ["latin"] });
+const coinbase = localFont({
+  src: [
+    {
+      path: "fonts/Coinbase_Display-Bold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+  ],
+});
+
 export const metadata = {
-  title: "Arbitrum Faucet App",
+  title: "Base Faucet App",
   description:
-    "Find Arbitrum faucets to get testnet tokens for your next project. Explore Arbitrum, Stylus, Sepolia, and Goerli testnet faucets.",
+    "Find Base faucets to get testnet tokens for your next project. Explore Base Testnet faucets.",
   keywords: [
-    "arbitrum-faucet",
-    "testnet tokens arbitrum",
-    "Arbitrum",
-    "Arbitrum faucet",
+    "base-faucet",
+    "testnet tokens base",
+    "base",
+    "base faucet",
     "faucet",
-    "Arb faucet",
-    "Stylus",
-    "Arb Stylus",
-    "Arbitrum Stylus",
-    "Arbitrum Stylus faucet",
-    "Stylus faucet",
+    "based faucet",
     "Sepolia faucet",
     "Goerli faucet",
     "testnet tokens",
@@ -26,15 +36,15 @@ export const metadata = {
     "blockchain testnet",
     "Ethereum testnet",
     "Ethereum faucet",
-    "Arbitrum testnet",
+    "base testnet",
   ],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className}  text-center bg-navy`}>
-        <nav className={`${conthrax.className}`}>
+      <body className={`${montserrat.className}  text-center`}>
+        <nav className={`${coinbase.className}`}>
           <Header />
         </nav>
         {children}

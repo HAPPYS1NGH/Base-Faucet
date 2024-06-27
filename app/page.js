@@ -4,8 +4,9 @@ import NetworkCard from "@/components/ui/NetworkCard";
 export default function Home() {
   return (
     <main className="flex flex-col items-center">
-      <div>Base</div>
-      <div>Faucet</div>
+      {networks.map((network) => {
+        return <NetworkCard key={network} name={network} />;
+      })}
     </main>
   );
 }
