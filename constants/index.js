@@ -123,7 +123,7 @@ export const faucetInfo = {
       recover: "1 Week",
       dailySupply: "None",
       required: "Mainnet Balance",
-      image: "faucets/coinbase.png",
+      image: "faucets/coinbase.svg",
       address: "0xcbF4f52238FC9bB658327041252a44D5f6edD600",
     },
     {
@@ -145,7 +145,7 @@ export const faucetInfo = {
       recover: "24 Hours",
       dailySupply: "None",
       required: "Mainnet Balance",
-      image: "faucets/drop.svg",
+      image: "faucets/getblock.svg",
       address: "0x41c615fde7c6ea061c6a410db782c5f79d81a001",
     },
     {
