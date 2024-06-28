@@ -1,6 +1,6 @@
 import { sepoliaClient } from "@/lib/client";
 import { faucetInfo } from "@/constants";
-import { getLastTransactionTimestampForAddress } from "@/lib/utils/arbitrumSDK";
+import { getLastTransactionTimestampForAddress } from "@/lib/utils/alchemySDK";
 
 // Utility function to introduce a delay
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
