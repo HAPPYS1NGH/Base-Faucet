@@ -23,7 +23,7 @@ const processAddress = async (address) => {
       "base-sepolia"
     );
 
-    console.log("lastActive after data.result in ARB", lastActive);
+    console.log("lastActive after data.result in Base", lastActive);
     // Convert the time elapsed between the last active time and the current time in UTC accordingly in minutes, hours, days, weeks, months or years
     const timeElapsed = Date.now() / 1000 - lastActive;
     console.log("timeElapsed", timeElapsed);
