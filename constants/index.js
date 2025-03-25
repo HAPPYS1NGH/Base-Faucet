@@ -118,13 +118,13 @@ export const faucetInfo = {
     {
       name: "CoinBase",
       link: "https://portal.cdp.coinbase.com/products/faucet",
-      maxAmount: "0.5",
-      minAmount: "0.5",
-      recover: "1 Week",
+      maxAmount: "0.01",
+      minAmount: "0.0001",
+      recover: "24 Hours",
       dailySupply: "None",
       required: "Mainnet Balance",
       image: "faucets/coinbase.svg",
-      address: "0xcbF4f52238FC9bB658327041252a44D5f6edD600",
+      address: "0x6Cd01c0F55ce9E0Bf78f5E90f72b4345b16d515d",
     },
     {
       name: "POW Faucet",
@@ -217,13 +217,13 @@ export const faucetInfo = {
     {
       name: "L2 Faucet",
       link: "https://www.l2faucet.com/base",
-      maxAmount: "0.01",
+      maxAmount: "0.06",
       minAmount: "0.01",
       recover: "24 hours",
       dailySupply: "None",
       required: "Passkey",
       image: "faucets/l2.png",
-      address: "0xc28a3910Db6c9E57022497Ab9ce9B35dBF460323",
+      address: "0xd1bd27c9bE2943e8ec0ce43d6F8B8f9Ce434EEb7",
     },
   ],
 };
