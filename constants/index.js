@@ -225,5 +225,16 @@ export const faucetInfo = {
       image: "faucets/l2.png",
       address: "0xd1bd27c9bE2943e8ec0ce43d6F8B8f9Ce434EEb7",
     },
+    {
+      name: "Bitbond",
+      link: "https://tokentool.bitbond.com/faucet/base-sepolia",
+      maxAmount: "0.001",
+      minAmount: "0.001",
+      recover: "24 hours",
+      dailySupply: "None",
+      required: "Mainnet Balance",
+      image: "faucets/bitbond.svg",
+      address: "0x9Cab0C7fF1C6250e641f4Dcd4d9cD9db83bfFB71",
+    },
   ],
 };
