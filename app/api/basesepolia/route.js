@@ -18,8 +18,5 @@ export async function GET() {
     gasPrice = (parseFloat(gasPrice) / 1e6).toFixed(2); // Divide by 1e6 and ensure two decimal places
   }
   let gasValue = `${gasPrice}${gasPriceUnit}`;
-  console.log(gasValue);
-  console.log("blockNumber", blockNumber);
-  console.log("gasPrice", gasPrice);
   return Response.json({ blockNumber, gasPrice: gasValue });
 }

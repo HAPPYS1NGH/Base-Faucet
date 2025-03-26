@@ -21,11 +21,9 @@ const processAddress = async (address) => {
       address,
       "sepolia"
     );
-    console.log("lastActive after data.result", lastActive);
 
     // Convert the time elapsed between the last active time and the current time in UTC accordingly in minutes, hours, days, weeks, months or years
     const timeElapsed = Date.now() / 1000 - lastActive;
-    console.log("timeElapsed", timeElapsed);
     let time = "";
 
     // Determine the appropriate unit based on the time elapsed
@@ -76,9 +74,7 @@ const processAddress = async (address) => {
 export async function GET() {
   try {
     const faucets = faucetInfo.Sepolia;
-    console.log("faucets", faucets);
     const addresses = faucets.map((faucet) => faucet.address);
-    console.log("addresses", addresses);
 
     const batchSize = 4; // Number of addresses to process per batch
     const delayMs = 1000; // Delay between batches in milliseconds
@@ -93,11 +89,9 @@ export async function GET() {
         await delay(delayMs); // Wait before processing the next batch
       }
     }
-
-    console.log("faucetData", faucetData);
     return Response.json({ faucetData });
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return Response.error("Error");
   }
 }
