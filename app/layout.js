@@ -44,12 +44,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${montserrat.className}  text-center`}>
-        <nav className={`${coinbase.className}`}>
-          <Header />
-        </nav>
-        {children}
-        <Footer />
-        <Analytics />
+        <PostHogProvider>
+          <nav className={`${coinbase.className}`}>
+            <Header />
+          </nav>
+          {children}
+          <Footer />
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   );
