@@ -46,48 +46,47 @@ const formatTimeElapsed = (timestamp) => {
     return time;
 };
 
-// Function to process a single address
+// Function to process a single address.
+// Balance and last-activity are fetched independently so that a failure
+// in one does not blank out the other (a transient RPC error on the
+// balance call must not turn a known activity time into "Unknown").
 const processAddress = async (address, network) => {
+    let balance = "0";
+    let lastActive = "Unknown";
+    let timestamp = 0;
+    let failed = false;
+
+    const config = chainConfigs[network];
+    if (!config) {
+        console.error('Unknown network:', network);
+        return { balance, lastActive, timestamp, address, failed: true };
+    }
+
     try {
-        const config = chainConfigs[network];
-        if (!config) {
-            throw new Error('Unknown network');
-        }
-
-        const client = config.client;
-        const bal = await client.getBalance({ address: address });
-
-        // Convert Big Number and divide by 10^18 to get the balance in ETH
+        const bal = await config.client.getBalance({ address });
         const balStr = bal.toString();
-        let balance;
         if (balStr.length <= 18) {
             balance = "0." + balStr.padStart(18, '0').slice(0, 4);
         } else {
             balance = balStr.slice(0, -18) + "." + balStr.slice(-18).slice(0, 4);
         }
+    } catch (e) {
+        console.error('Error fetching balance:', address, e);
+        failed = true;
+    }
 
-        const lastActive = await getLastTransactionTimestampForAddress(
+    try {
+        timestamp = await getLastTransactionTimestampForAddress(
             address,
             network.toLowerCase()
         );
-
-        const time = formatTimeElapsed(lastActive);
-
-        return {
-            balance: balance,
-            lastActive: time,
-            timestamp: lastActive,
-            address: address,
-        };
+        lastActive = timestamp ? formatTimeElapsed(timestamp) : "Unknown";
     } catch (e) {
-        console.error('Error processing address:', address, e);
-        return {
-            balance: "0",
-            lastActive: "Unknown",
-            timestamp: 0,
-            address: address,
-        };
+        console.error('Error fetching last activity:', address, e);
+        failed = true;
     }
+
+    return { balance, lastActive, timestamp, address, failed };
 };
 
 function FaucetInfo({ network }) {
@@ -113,7 +112,9 @@ function FaucetInfo({ network }) {
     useEffect(() => {
         const getFaucetInfo = async () => {
             try {
-                // Check session storage first
+                // Trust session storage only if present. The cache is
+                // written exclusively after a fully successful fetch
+                // (see below), so a stored entry is always good data.
                 const storedData = sessionStorage.getItem(`faucetData_${network}`);
                 if (storedData) {
                     setFaucetData(JSON.parse(storedData));
@@ -161,8 +162,13 @@ function FaucetInfo({ network }) {
 
                 setFaucetData(combinedData);
 
-                // Store in session storage
-                sessionStorage.setItem(`faucetData_${network}`, JSON.stringify(combinedData));
+                // Cache only when every lookup succeeded. Caching a
+                // degraded result would pin "active Unknown" for the
+                // whole session; instead let the next load self-heal.
+                const allHealthy = fetchedData.length > 0 && fetchedData.every((f) => !f.failed);
+                if (allHealthy) {
+                    sessionStorage.setItem(`faucetData_${network}`, JSON.stringify(combinedData));
+                }
             } catch (error) {
                 console.error('Error fetching faucet info:', error);
             }
