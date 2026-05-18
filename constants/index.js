@@ -113,6 +113,17 @@ export const faucetInfo = {
       image: "faucets/rockx.png",
       address: "0x5594F939d67f56AEDBE80Ff1E9bf776Fd691d960",
     },
+    {
+      name: "OpenFaucet.org",
+      link: "https://openfaucet.org/sepolia",
+      maxAmount: "0.5",
+      minAmount: "0.05",
+      recover: "2 Hours",
+      dailySupply: "None",
+      required: "None",
+      image: "faucets/openfaucetorg.png",
+      address: "0x6752365ce8c2330fe7422B6322823BcdA2B74F67",
+    },
   ],
   BaseSepolia: [
     {
@@ -235,6 +246,17 @@ export const faucetInfo = {
       required: "Mainnet Balance",
       image: "faucets/bitbond.svg",
       address: "0x9Cab0C7fF1C6250e641f4Dcd4d9cD9db83bfFB71",
+    },
+    {
+      name: "OpenFaucet.org",
+      link: "https://openfaucet.org/base-sepolia",
+      maxAmount: "0.5",
+      minAmount: "0.05",
+      recover: "2 Hours",
+      dailySupply: "None",
+      required: "None",
+      image: "faucets/openfaucetorg.png",
+      address: "0x6752365ce8c2330fe7422B6322823BcdA2B74F67",
     },
   ],
 };
